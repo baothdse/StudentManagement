@@ -38,7 +38,7 @@ public class Menu {
 				break;
 			case 5: 
 				stm.sortStudentByID();
-				//stm.printAll();
+				stm.printAll();
 				break;
 			default:
 				System.out.print("Exit");
