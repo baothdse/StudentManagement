@@ -4,7 +4,7 @@ public class Student {
 	private int studentId;
 	private String studentName;
 	private int studentAge;
-	private int point;
+	private int mark;
 	Student() {
 		
 	}
@@ -29,16 +29,16 @@ public class Student {
 	public void setAge(int age) {
 		this.studentAge = age;
 	}
-	public int getPoint() {
-		return point;
+	public int getMark() {
+		return mark;
 	}
-	public void setPoint(int point) {
-		this.point = point;
+	public void setMark(int mark) {
+		this.mark = mark;
 	}
 	
 	@Override
 	public String toString() {
-		return "Student [id = " + studentId + ", " + "name=" + studentName + ", age=" + studentAge + ", point=" + point + "]";
+		return "Student [id = " + studentId + ", " + "name=" + studentName + ", age=" + studentAge + ", mark=" + mark + "]";
 	}
 	
 }

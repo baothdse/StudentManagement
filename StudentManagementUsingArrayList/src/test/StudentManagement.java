@@ -12,7 +12,7 @@ public class StudentManagement {
 	public Student inputStudent(Student s) {
 		
 		int studentId = 0;
-		int studentAge = 0, point = 0;
+		int studentAge = 0, mark = 0;
 		String studentName = null;
 		
 		try {
@@ -25,8 +25,8 @@ public class StudentManagement {
 			System.out.println("Input Student's age: ");
 			studentAge = Integer.parseInt(sc1.nextLine());
 
-			System.out.println("Input Student's point: ");
-			point = Integer.parseInt(sc1.nextLine());
+			System.out.println("Input Student's mark: ");
+			mark = Integer.parseInt(sc1.nextLine());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class StudentManagement {
 		s.setId(studentId);
 		s.setName(studentName);
 		s.setAge(studentAge);
-		s.setPoint(point);
+		s.setMark(mark);
 		return s;
 	}
 	
@@ -61,8 +61,8 @@ public class StudentManagement {
 			return false;
 		}
 
-		if (s.getPoint() < 0 || s.getPoint() > 10) {
-			System.out.println("Point range: 0-10! ");
+		if (s.getMark() < 0 || s.getMark() > 10) {
+			System.out.println("Mark range: 0-10! ");
 			return false;
 		}
 		return true;
@@ -87,7 +87,7 @@ public class StudentManagement {
 	public void updateStudentInfo(int studentId) {
 		Student tempStudent = new Student();
 		int studentAge = 0;
-		int point = 0;
+		int mark = 0;
 		String studentName = null;
 		for (int i = 0; i < studentList.size(); i++) {
 			if (studentList.get(i).getId() == studentId) {
@@ -99,12 +99,12 @@ public class StudentManagement {
 					System.out.println("Input new Student's age: ");
 					studentAge = Integer.parseInt(sc1.nextLine());
 
-					System.out.println("Input new Student's point: ");
-					point = Integer.parseInt(sc1.nextLine());
+					System.out.println("Input new Student's mark: ");
+					mark = Integer.parseInt(sc1.nextLine());
 					
 					tempStudent.setName(studentName);
 					tempStudent.setAge(studentAge);
-					tempStudent.setPoint(point);	
+					tempStudent.setMark(mark);	
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -112,7 +112,7 @@ public class StudentManagement {
 				if (validateInput(tempStudent) == true) {
 					studentList.get(i).setName(studentName);
 					studentList.get(i).setAge(studentAge);
-					studentList.get(i).setPoint(point);
+					studentList.get(i).setMark(mark);
 					System.out.println("Update student who have ID= " + studentList.get(i).getId() + " successful!");
 				}
 				return;
@@ -161,5 +161,70 @@ public class StudentManagement {
 			System.out.println(studentList.get(i));
 		}
 
+	}
+	
+	// Sort student by mark using Merge Sort
+	public void mergeSort(ArrayList<Student> listOfStudent) {
+		if (listOfStudent.size() == 1) {
+			return;
+		}
+		
+		ArrayList<Student> leftStudentList = new ArrayList<Student>();
+		ArrayList<Student> rightStudentList = new ArrayList<Student>();
+		int mid = listOfStudent.size()/2;
+		
+		for (int leftIndex = 0; leftIndex < mid; leftIndex++) {
+			leftStudentList.add(listOfStudent.get(leftIndex));
+		}
+		
+		for (int rightIndex = mid; rightIndex <= listOfStudent.size() - 1; rightIndex++) {
+			rightStudentList.add(listOfStudent.get(rightIndex));
+		}
+		
+		mergeSort(leftStudentList);
+		mergeSort(rightStudentList);
+		
+		merge(listOfStudent, leftStudentList, rightStudentList);
+	}
+	
+	public void merge(ArrayList<Student> listOfStudent, ArrayList<Student> leftStudentList, ArrayList<Student> rightStudentList ) {
+		int index = 0;
+		int rightIndex = 0;
+		int leftIndex = 0;
+		
+		while (leftIndex < leftStudentList.size() && rightIndex < rightStudentList.size()) {
+			if (leftStudentList.get(leftIndex).getMark() < rightStudentList.get(rightIndex).getMark()) {
+				listOfStudent.set(index, leftStudentList.get(leftIndex));
+				leftIndex++;
+				index++;
+			} else {
+				listOfStudent.set(index, rightStudentList.get(rightIndex));
+				rightIndex++;
+				index++;
+			}
+		}
+		
+		//add the rest of rightStudentList to listOfStudent
+		if (rightIndex >= rightStudentList.size()) {
+			while (leftIndex < leftStudentList.size()) {
+				listOfStudent.set(index, leftStudentList.get(leftIndex));
+				leftIndex++;
+				index++;
+			}
+		}
+		
+		//add the rest of leftStudentList to listOfStudent
+		if (leftIndex >= leftStudentList.size()) {
+			while (rightIndex< rightStudentList.size()) {
+				listOfStudent.set(index, rightStudentList.get(rightIndex));
+				rightIndex++;
+				index++;
+			}
+		}
+	}
+	
+	//Call merge sort function
+	public void sortStudentByPoint() {
+		mergeSort(studentList);
 	}
 }
