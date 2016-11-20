@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 public class StudentManagement {
 	ArrayList<Student> studentList = new ArrayList<Student>();
-	
+	Scanner sc = new Scanner(System.in);
+	Scanner sc1 = new Scanner(System.in);
 
 	// Function input a student
 	public Student inputStudent(Student s) {
@@ -13,21 +14,19 @@ public class StudentManagement {
 		int studentId = 0;
 		int studentAge = 0, point = 0;
 		String studentName = null;
-		try {			
-			Scanner sc = new Scanner(System.in);
-
-			System.out.println("Input student's name");
-			studentName = sc.nextLine();
-			
+		
+		try {
 			System.out.println("Input Student's id: ");
-			studentId = sc.nextInt();
+			studentId = Integer.parseInt(sc1.nextLine());
+			
+			System.out.println("Input student's name");
+			studentName = sc.nextLine();			
 
 			System.out.println("Input Student's age: ");
-			studentAge = sc.nextInt();
+			studentAge = Integer.parseInt(sc1.nextLine());
 
 			System.out.println("Input Student's point: ");
-			point = sc.nextInt();		
-			sc.close();
+			point = Integer.parseInt(sc1.nextLine());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -93,20 +92,20 @@ public class StudentManagement {
 		for (int i = 0; i < studentList.size(); i++) {
 			if (studentList.get(i).getId() == studentId) {
 				try {
-					Scanner sc = new Scanner(System.in);
+					
 					System.out.println("Input new student's name");
 					studentName = sc.nextLine();
 
 					System.out.println("Input new Student's age: ");
-					studentAge = sc.nextInt();
+					studentAge = Integer.parseInt(sc1.nextLine());
 
 					System.out.println("Input new Student's point: ");
-					point = sc.nextInt();
+					point = Integer.parseInt(sc1.nextLine());
 					
 					tempStudent.setName(studentName);
 					tempStudent.setAge(studentAge);
 					tempStudent.setPoint(point);	
-					sc.close();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,8 +113,11 @@ public class StudentManagement {
 					studentList.get(i).setName(studentName);
 					studentList.get(i).setAge(studentAge);
 					studentList.get(i).setPoint(point);
+					System.out.println("Update student who have ID= " + studentList.get(i).getId() + " successful!");
 				}
 				return;
+			} else {
+				System.out.println("This ID is not existed in system!");
 			}
 		}		
 	}
@@ -137,6 +139,9 @@ public class StudentManagement {
 		for (int i = 0; i < studentList.size(); i++) {
 			if (studentList.get(i).getId() == ID) {
 				studentList.remove(i);
+				System.out.println("Delete successful");
+			} else {
+				System.out.println("This ID is not existed in system. Please try again!");
 			}
 		}
 	}
