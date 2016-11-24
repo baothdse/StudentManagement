@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Menu {
 	public void menu() {
-		StudentManagement stm = new StudentManagement();
+		Scanner sc = new Scanner(System.in);
+		StudentManagement stm = new StudentManagement(sc);
 		int ID;
 		int choice = 0;
-		Scanner sc = new Scanner(System.in);
 		while (choice <= 6) {
 			System.out.println("--------menu---------");
 			System.out.println("1. Add new student.");
@@ -18,6 +18,7 @@ public class Menu {
 			System.out.println("6. Sort Student by point.");
 			System.out.println("Input your choice: ");
 			choice = Integer.parseInt(sc.nextLine());	
+			
 			switch (choice) {
 			case 1:
 				stm.addStudentToList();

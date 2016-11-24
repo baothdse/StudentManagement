@@ -5,11 +5,16 @@ import java.util.Scanner;
 
 public class StudentManagement {
 	ArrayList<Student> studentList = new ArrayList<Student>();
-	Scanner sc = new Scanner(System.in);
-	Scanner sc1 = new Scanner(System.in);
+//	Scanner sc1 = new Scanner(System.in);
+	private Scanner sc;
+	
+	public StudentManagement(Scanner scanner) {
+		sc = scanner;
+	}
 
 	// Function input a student
 	public Student inputStudent(Student s) {
+		
 		
 		int studentId = 0;
 		int studentAge = 0, mark = 0;
@@ -17,16 +22,16 @@ public class StudentManagement {
 		
 		try {
 			System.out.println("Input Student's id: ");
-			studentId = Integer.parseInt(sc1.nextLine());
+			studentId = Integer.parseInt(sc.nextLine());
 			
 			System.out.println("Input student's name");
 			studentName = sc.nextLine();			
 
 			System.out.println("Input Student's age: ");
-			studentAge = Integer.parseInt(sc1.nextLine());
+			studentAge = Integer.parseInt(sc.nextLine());
 
 			System.out.println("Input Student's mark: ");
-			mark = Integer.parseInt(sc1.nextLine());
+			mark = Integer.parseInt(sc.nextLine());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,10 +102,10 @@ public class StudentManagement {
 					studentName = sc.nextLine();
 
 					System.out.println("Input new Student's age: ");
-					studentAge = Integer.parseInt(sc1.nextLine());
+					studentAge = Integer.parseInt(sc.nextLine());
 
 					System.out.println("Input new Student's mark: ");
-					mark = Integer.parseInt(sc1.nextLine());
+					mark = Integer.parseInt(sc.nextLine());
 					
 					tempStudent.setName(studentName);
 					tempStudent.setAge(studentAge);
@@ -145,6 +150,7 @@ public class StudentManagement {
 			}
 		}
 	}
+	
 //	// Check ID that is duplicate
 //	public boolean checkId(int ID) {
 //		for (int i = 0; i < student.size(); i++) {
